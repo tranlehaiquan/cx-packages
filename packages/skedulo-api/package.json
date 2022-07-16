@@ -1,0 +1,11 @@
+{
+  "name": "skedulo-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "tsc": "^2.0.4",
+    "typescript": "^4.7.4"
+  }
+}
