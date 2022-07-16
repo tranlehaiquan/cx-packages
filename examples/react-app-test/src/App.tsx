@@ -5,6 +5,7 @@ import fetch from "./fetch";
 
 function App() {
   const [result, setResult] = useState<any>()
+  
   useEffect(() => {
     (async () => {
       const a = await fetch.fetchVocabulary({
