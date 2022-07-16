@@ -6,8 +6,10 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "ts-node": "^10.9.1",
-    "build": "babel src --out-dir dist --config-file ./babel.config.js --extensions '.ts,.tsx'",
-    "build:declarations": "tsc --emitDeclarationOnly --skipLibCheck"
+    "build": "yarn clean && yarn build:ts && yarn build:declarations",
+    "build:ts": "babel src --out-dir dist --config-file ./babel.config.js --extensions '.ts,.tsx'",
+    "build:declarations": "tsc --emitDeclarationOnly --skipLibCheck --outDir dist",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@babel/cli": "^7.18.6",

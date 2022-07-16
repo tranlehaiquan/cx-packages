@@ -10,14 +10,37 @@ const createFetch = (fetchConfig: FetchConfig) => {
   // global configuration
   fetcher.configure(fetchConfig);
 
-  const whoami = fetcher
+  const fetchVocabulary = fetcher
     .path("/custom/vocabulary/{schemaName}/{fieldName}")
     .method("get")
     .create();
 
+  const fetchAttachments = fetcher
+    .path("/files/attachment/{fileId}")
+    .method("get")
+    .create();
+  const fetchUserMetadata = fetcher
+    .path("/auth/metadata/user")
+    .method("get")
+    .create();
+
+  const pushOnOffNotification = fetcher
+    .path("/notifications/oneoff")
+    .method("post")
+    .create();
+
+  const fetchAddressGeocode = fetcher
+    .path("/geoservices/geocode")
+    .method("post")
+    .create();
+
   return {
-    whoami,
-  }
+    fetchVocabulary,
+    fetchAttachments,
+    fetchUserMetadata,
+    pushOnOffNotification,
+    fetchAddressGeocode,
+  };
 };
 
 export default createFetch;

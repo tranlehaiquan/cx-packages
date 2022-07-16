@@ -1,0 +1,54 @@
+Arguments: 
+  /Users/quantranlehai/.nvm/versions/node/v16.13.0/bin/node /Users/quantranlehai/.yarn/bin/yarn.js build:declarations
+
+PATH: 
+  /Users/quantranlehai/.nvm/versions/node/v16.13.0/bin:/Users/quantranlehai/.yarn/bin:/Users/quantranlehai/.config/yarn/global/node_modules/.bin:/Users/quantranlehai/Library/pnpm:/Users/quantranlehai/.nvm/versions/node/v10.24.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/quantranlehai/.yarn/bin:/Users/quantranlehai/.config/yarn/global/node_modules/.bin:/Users/quantranlehai/Library/pnpm:/Users/quantranlehai/.nvm/versions/node/v16.13.0/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.13.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/quantranlehai/learn/skedulo-api/packages/skedulo-api/package.json: Unexpected token } in JSON at position 343
+      at JSON.parse (<anonymous>)
+      at /Users/quantranlehai/.yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/Users/quantranlehai/.yarn/lib/cli.js:310:30)
+      at /Users/quantranlehai/.yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "skedulo-api",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "license": "MIT",
+    "scripts": {
+      "start": "ts-node src/index.ts",
+      "ts-node": "^10.9.1",
+      "build": "babel src --out-dir dist --config-file ./babel.config.js --extensions '.ts,.tsx'",
+      "build:declarations": "tsc --emitDeclarationOnly --skipLibCheck",
+    },
+    "dependencies": {
+      "@babel/cli": "^7.18.6",
+      "@babel/core": "^7.18.6",
+      "@babel/preset-env": "^7.18.6",
+      "@babel/preset-typescript": "^7.18.6",
+      "@types/node-fetch": "2",
+      "axios": "^0.27.2",
+      "node-fetch": "2",
+      "openapi-typescript-fetch": "^1.1.3",
+      "tsc": "^2.0.4",
+      "typescript": "^4.7.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

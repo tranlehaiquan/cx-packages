@@ -1,0 +1,15 @@
+import createFetch from "skedulo-api";
+
+const fetch = createFetch( {
+  baseUrl: "https://api.skedulo.com",
+  init: {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5za2VkdWxvLmNvbS9hdXRoL3Rva2VuIiwiYXVkIjoiNWMwMjMzZTc5MWMyM2Q0ZmFkZGQ2MGM4MDE1MGY3MzYiLCJqdGkiOiJSSWg1cWtTcDJYQkswMnJSYXRtc1N3SVhkT3ZHbGdTUCIsImh0dHBzOi8vYXBpLnNrZWR1bG8uY29tL3ZlbiI6eyJ1c2VyX2lkIjoiMDAwMWUxNWEtMDYxOC00NmZiLWJiYjktYmNlNjc0NzVhNzBhIn0sImh0dHBzOi8vYXBpLnNrZWR1bG8uY29tL3VzZXJfaWQiOiJhdXRoMHw2MTNhNDA0MGY3ZjVhNTAwNmEzZTljN2QiLCJodHRwczovL2FwaS5za2VkdWxvLmNvbS9vcmdhbml6YXRpb25faWQiOiJza19kMTZmMTM4YjhiMWM0MWYyOTZlYjk5ZjAwZDY0YWY3NyIsImh0dHBzOi8vYXBpLnNrZWR1bG8uY29tL3VzZXJuYW1lIjoiZXhwZXJ0c2VydmljZXMrY2VudHJpYS1kZXZAc2tlZHVsby5jb20iLCJodHRwczovL2FwaS5za2VkdWxvLmNvbS9yZXNvdXJjZV9pZCI6IjAwMDU0NWY4LTQxMTAtNGU2OS1hYjA1LTc2ODVjYjczMWU2YiIsImh0dHBzOi8vYXBpLnNrZWR1bG8uY29tL3JvbGVzIjpbImFkbWluaXN0cmF0b3IiXSwic3ViIjoiYXV0aDB8NjEzYTQwNDBmN2Y1YTUwMDZhM2U5YzdkIiwiaHR0cHM6Ly9hcGkuc2tlZHVsby5jb20vdmVuZG9yIjoic2tlZHVsbyJ9.hiVxe4RkacmLuUufcSCoq_RvAiUZhK6MmfFlL1vpVQY",
+    },
+  },
+  use: [],
+})
+
+export default fetch
