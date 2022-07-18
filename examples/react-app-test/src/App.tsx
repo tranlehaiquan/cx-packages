@@ -13,6 +13,7 @@ function App() {
         fieldName: "JobStatus",
       });
       const b = await fetch.fetchUserMetadata({})
+      const c = await fetch.graphql({ query: '', operationName: '' });
       console.log(a);
       console.log(b);
       setResult(a.data.result)

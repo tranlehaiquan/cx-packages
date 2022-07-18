@@ -5542,6 +5542,15 @@ export interface operations {
         };
       };
     };
+    requestBody: {
+      content: {
+          "application/json": {
+              operationName?: string;
+              query: string;
+              variables?: any
+          };
+      };
+    };
   };
   /**
    * GraphQL batching involves sending multiple queries or mutations to the server in a single request. This reduces the number of server round trips to fetch data, which makes interaction more efficient.

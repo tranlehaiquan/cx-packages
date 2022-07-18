@@ -34,12 +34,17 @@ const createFetch = (fetchConfig: FetchConfig) => {
     .method("post")
     .create();
 
+  const graphql = fetcher.path("/graphql").method("post").create();
+  const graphqlBatch = fetcher.path("/graphql/batch").method("post").create();
+
   return {
     fetchVocabulary,
     fetchAttachments,
     fetchUserMetadata,
     pushOnOffNotification,
     fetchAddressGeocode,
+    graphql,
+    graphqlBatch,
   };
 };
 
