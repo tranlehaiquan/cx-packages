@@ -1,0 +1,813 @@
+{
+    "servers" : [
+        {
+            "url" : "https://api.skedulo.com/files"
+        }
+    ],
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "Files API",
+        "description" : "Skedulo Files API",
+        "version" : "1.0.0"
+    },
+    "paths" : {
+        "/attachment/{fileId}" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Retrieve a file with the given identifier",
+                "description" : "",
+                "operationId" : "downloadFile",
+                "parameters" : [
+                    {
+                        "name" : "fileId",
+                        "in" : "path",
+                        "description" : "Identifier of the file to retrieve",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "attach",
+                        "in" : "query",
+                        "description" : "True to force the browser to download the file, false to inline the content",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "boolean",
+                            "default" : false
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/octet-stream" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "format" : "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "404" : {
+                        "description" : "Attachment with the given identifier is not found"
+                    }
+                }
+            },
+            "put" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Rename a file (implemented for Salesforce only)",
+                "description" : "",
+                "operationId" : "renameFile",
+                "parameters" : [
+                    {
+                        "name" : "fileId",
+                        "in" : "path",
+                        "description" : "Identifier of the file to rename",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "name",
+                        "in" : "query",
+                        "description" : "The new name of the file",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/FileSaveResult"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "404" : {
+                        "description" : "Attachment with the given identifier is not found"
+                    }
+                }
+            },
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Find attachments that belong to the parent",
+                "description" : "",
+                "operationId" : "deleteFile",
+                "parameters" : [
+                    {
+                        "name" : "fileId",
+                        "in" : "path",
+                        "description" : "Identifier of the attachment to delete",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/DeletedApiResult"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "404" : {
+                        "description" : "Attachment with the given identifier is not found"
+                    }
+                }
+            }
+        },
+        "/direct/{userId}/{fileId}" : {
+            "get" : {
+                "summary" : "Direct link to an attachment",
+                "description" : "",
+                "operationId" : "downloadFileDirect",
+                "parameters" : [
+                    {
+                        "name" : "userId",
+                        "in" : "path",
+                        "description" : "Skedulo userId of the requesting user",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "fileId",
+                        "in" : "path",
+                        "description" : "Id of the attachment",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "expiry",
+                        "in" : "query",
+                        "description" : "The instant beyond which this URL will be invalid",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "signature",
+                        "in" : "query",
+                        "description" : "A cryptographic signature to validate the integrity of this URL",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "attach",
+                        "in" : "query",
+                        "description" : "True to force the browser to download the file, false to inline the content",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "boolean",
+                            "default" : false
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/octet-stream" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "format" : "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "401" : {
+                        "description" : "Invalid signature or past expiry date"
+                    },
+                    "404" : {
+                        "description" : "Attachment with the given identifier is not found"
+                    }
+                }
+            }
+        },
+        "/direct/{userId}" : {
+            "get" : {
+                "summary" : "This api is deprecated. Use /sf_avatar",
+                "description" : "",
+                "operationId" : "getAvatarDirect",
+                "parameters" : [
+                    {
+                        "name" : "userId",
+                        "in" : "path",
+                        "description" : "Skedulo userId of the requesting user",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "expiry",
+                        "in" : "query",
+                        "description" : "The instant beyond which this URL will be invalid",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "signature",
+                        "in" : "query",
+                        "description" : "A cryptographic signature to validate the integrity of this URL",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "size_hint",
+                        "in" : "query",
+                        "description" : "Requested image size. Return thumbnail image for 'small' or 'thumbnail' input, full image otherwise",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/octet-stream" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "format" : "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "401" : {
+                        "description" : "Invalid signature or past expiry date"
+                    }
+                }
+            }
+        },
+        "/sf_avatar/{vendorUserId}" : {
+            "get" : {
+                "summary" : "Direct link to an avatar image for Salesforce orgs that disable Chatter",
+                "description" : "",
+                "operationId" : "getAvatarWithContextUser",
+                "parameters" : [
+                    {
+                        "name" : "vendorUserId",
+                        "in" : "path",
+                        "description" : "Salesforce userId of the user having the avatar image",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "generating_userId",
+                        "in" : "query",
+                        "description" : "Full Auth0 userId of the user who generated this direct link",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "expiry",
+                        "in" : "query",
+                        "description" : "The instant beyond which this URL will be invalid",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "signature",
+                        "in" : "query",
+                        "description" : "A cryptographic signature to validate the integrity of this URL",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "size_hint",
+                        "in" : "query",
+                        "description" : "Requested image size. Return thumbnail image for 'small' or 'thumbnail' input, full image otherwise",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/octet-stream" : {
+                                "schema" : {
+                                    "type" : "string",
+                                    "format" : "binary"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    },
+                    "401" : {
+                        "description" : "Invalid signature or past expiry date"
+                    }
+                }
+            }
+        },
+        "/attachments" : {
+            "get" : {
+                "summary" : "Find attachments that belong to the parent",
+                "description" : "",
+                "operationId" : "getFiles",
+                "parameters" : [
+                    {
+                        "name" : "parent_ids",
+                        "in" : "query",
+                        "description" : "Comma-separated identifiers of the parents to retrieve attachments for",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ApiResultsFileMetaMap"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "Resource with parent identifier not found"
+                    }
+                }
+            }
+        },
+        "/attachments/{parentId}" : {
+            "get" : {
+                "summary" : "Find attachments that belong to the parent",
+                "description" : "",
+                "operationId" : "getFilesSingle",
+                "parameters" : [
+                    {
+                        "name" : "parentId",
+                        "in" : "path",
+                        "description" : "Identifier of the parent to retrieve attachments for",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ApiResultsFileMeta"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "Resource with parent identifier not found"
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Upload an attachment to a parent resource. Content-Length and Content-Type are required.",
+                "description" : "",
+                "operationId" : "uploadReturnOldMeta",
+                "parameters" : [
+                    {
+                        "name" : "parentId",
+                        "in" : "path",
+                        "description" : "Identifier of the parent to add the attachment to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "X-Skedulo-Name",
+                        "in" : "header",
+                        "description" : "The name of the attachment",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "X-Skedulo-Description",
+                        "in" : "header",
+                        "description" : "An optional description of the attachment",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ApiResultFileMetaOld"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Upload an attachment to a parent resource. Content-Length and Content-Type are required.",
+                "description" : "",
+                "operationId" : "uploadReturnNewMeta",
+                "parameters" : [
+                    {
+                        "name" : "parentId",
+                        "in" : "path",
+                        "description" : "Identifier of the parent to add the attachment to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "X-Skedulo-Name",
+                        "in" : "header",
+                        "description" : "The name of the attachment",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "X-Skedulo-Description",
+                        "in" : "header",
+                        "description" : "An optional description of the attachment",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ApiResultFileMeta"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Invalid data supplied"
+                    }
+                }
+            }
+        },
+        "/avatar" : {
+            "get" : {
+                "summary" : "Return a map of (userId -> url) for the given userIds",
+                "description" : "",
+                "operationId" : "getAvatarFor",
+                "parameters" : [
+                    {
+                        "name" : "user_ids",
+                        "in" : "query",
+                        "description" : "Comma-separated identifiers of the users to get the avatar urls for",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "size_hint",
+                        "in" : "query",
+                        "description" : "Requested image size. Return thumbnail image for 'small' or 'thumbnail' input, full image otherwise",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/AvatarFullResult"
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "User with the given identifier not found"
+                    }
+                }
+            }
+        }
+    },
+    "components" : {
+        "securitySchemes" : {
+            "Authorization" : {
+                "type" : "apiKey",
+                "in" : "header",
+                "name" : "Authorization"
+            }
+        },
+        "schemas" : {
+            "ApiResults" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "object"
+                        }
+                    }
+                }
+            },
+            "ApiResultsFileMetaMap" : {
+                "type" : "object",
+                "additionalProperties" : {
+                    "type" : "array",
+                    "items" : {
+                        "$ref" : "#/components/schemas/FileMetaOld"
+                    }
+                }
+            },
+            "ApiResultsFileMeta" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/FileMetaOld"
+                        }
+                    }
+                }
+            },
+            "FileMetaOld" : {
+                "type" : "object",
+                "required" : [
+                    "fileName",
+                    "filePtr",
+                    "parentId",
+                    "uploadDate"
+                ],
+                "properties" : {
+                    "filePtr" : {
+                        "type" : "string"
+                    },
+                    "size" : {
+                        "type" : "string"
+                    },
+                    "contentType" : {
+                        "type" : "string"
+                    },
+                    "fileName" : {
+                        "type" : "string"
+                    },
+                    "uploadDate" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                    },
+                    "parentId" : {
+                        "type" : "string"
+                    },
+                    "createdBy" : {
+                        "type" : "string"
+                    },
+                    "createdById" : {
+                        "type" : "string"
+                    },
+                    "description" : {
+                        "type" : "string"
+                    },
+                    "downloadUrl" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "FileMeta" : {
+                "type" : "object",
+                "required" : [
+                    "id",
+                    "parentId",
+                    "name",
+                    "createdById",
+                    "createdDate"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string"
+                    },
+                    "parentId" : {
+                        "type" : "string"
+                    },
+                    "contentType" : {
+                        "type" : "string"
+                    },
+                    "name" : {
+                        "type" : "string"
+                    },
+                    "createdDate" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                    },
+                    "contentLength" : {
+                        "type" : "string"
+                    },
+                    "createdById" : {
+                        "type" : "string"
+                    },
+                    "description" : {
+                        "type" : "string"
+                    },
+                    "downloadUrl" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "DeletedApiResult" : {
+                "type" : "object",
+                "required" : [
+                    "deleted"
+                ],
+                "properties" : {
+                    "deleted" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "FileSaveResult" : {
+                "type" : "object",
+                "required" : [
+                    "id",
+                    "success"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string"
+                    },
+                    "success" : {
+                        "type" : "boolean"
+                    }
+                }
+            },
+            "ApiResult" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "type" : "object"
+                    }
+                }
+            },
+            "ApiResultFileMetaOld" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "$ref" : "#/components/schemas/FileMetaOld"
+                    }
+                }
+            },
+            "ApiResultFileMeta" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "$ref" : "#/components/schemas/FileMeta"
+                    }
+                }
+            },
+            "AvatarResults" : {
+                "type" : "object",
+                "additionalProperties" : {
+                    "type" : "string"
+                }
+            },
+            "AvatarError" : {
+                "type" : "object",
+                "required" : [
+                    "errorType",
+                    "errorMsg"
+                ],
+                "properties" : {
+                    "errorType" : {
+                        "type" : "string"
+                    },
+                    "errorMsg" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "AvatarErrors" : {
+                "type" : "object",
+                "additionalProperties" : {
+                    "$ref" : "#/components/schemas/AvatarError"
+                }
+            },
+            "AvatarAuth" : {
+                "type" : "object",
+                "required" : [
+                    "signature",
+                    "expiry"
+                ],
+                "properties" : {
+                    "signature" : {
+                        "type" : "string"
+                    },
+                    "expiry" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "AvatarAuths" : {
+                "type" : "object",
+                "additionalProperties" : {
+                    "$ref" : "#/components/schemas/AvatarAuth"
+                }
+            },
+            "AvatarFullResult" : {
+                "type" : "object",
+                "properties" : {
+                    "result" : {
+                        "$ref" : "#/components/schemas/AvatarResults"
+                    },
+                    "errors" : {
+                        "$ref" : "#/components/schemas/AvatarErrors"
+                    },
+                    "extra" : {
+                        "$ref" : "#/components/schemas/AvatarAuths"
+                    }
+                }
+            }
+        }
+    }
+}

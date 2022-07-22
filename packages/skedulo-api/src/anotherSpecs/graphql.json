@@ -1,0 +1,269 @@
+{
+    "servers" : [
+        {
+            "url" : "https://api.skedulo.com/graphql"
+        }
+    ],
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "GraphQL",
+        "description" : "GraphQL endpoints",
+        "version" : "1.0.0"
+    },
+    "paths" : {
+        "/graphql" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "GraphQL queries and mutations",
+                "description" : "Run queries and mutations against the schema using the `/graphql/graphql` endpoint. \n\nQueries and mutations are `POST` operations with a GraphQL payload that defines shape of the query or mutation you want to make against the schema. A mutation with multiple operations is executed as an atomic transaction.\n\nThe response may include standard Skedulo objects and custom objects and fields you have defined.\n\nTo improve the performance of query operations on Skedulo Platform, set the header X-Skedulo-Read-Only=true. This will execute against a read replica database and will produce an error if any write operation is attempted. Beware of race conditions - there may be a small delay between a write being executed and the data being available on the read replica.",
+                "operationId" : "graphql",
+                "responses" : {
+                    "200" : {
+                        "description" : "Query or Mutation result was returned",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/GraphQLResult"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "Query or Mutation failed, an error is returned.  The `data` property will be null in this case.",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/GraphQLResult"
+                                }
+                            }
+                        }
+                    },
+                    "401" : {
+                        "description" : "Authentication/Authorization failed",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/graphql/batch" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Make batch queries and mutations using GraphQL.",
+                "description" : "GraphQL batching involves sending multiple queries or mutations to the server in a single request. This reduces the number of server round trips to fetch data, which makes interaction more efficient. \n\nSee https://blog.apollographql.com/query-batching-in-apollo-63acfd859862 for more information",
+                "operationId" : "graphqlBatch",
+                "responses" : {
+                    "200" : {
+                        "description" : "An array of Query or Mutation results corresponding to the input",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "array",
+                                    "items" : {
+                                        "$ref" : "#/components/schemas/GraphQLResult"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401" : {
+                        "description" : "Authentication/Authorization failed",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "GraphQL Subscriptions",
+                "description" : "GraphQL Subscriptions via Apollo `graphql-ws` protocol. \n\n* Your tenant must have an API user. \n\n* You must be a 'Scheduler' or 'Administrator'. \n\nThe `Authorization` header must be passed in the `connection_init` message.",
+                "operationId" : "graphqlSubscriptions",
+                "responses" : {
+                    "101" : {
+                        "description" : "WebSocket connection succeeded",
+                        "content" : {
+                            "*/*" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/GraphQLResult"
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "If the WebSocket protocol was not 'graphql-ws'",
+                        "content" : {
+                            "*/*" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/GraphQLResult"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Error",
+                        "content" : {
+                            "*/*" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/schema" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Skedulo GraphQL schema",
+                "description" : "Retrieve the Skedulo GraphQL schema. ",
+                "operationId" : "graphqlSchema",
+                "responses" : {
+                    "200" : {
+                        "description" : "Schema was returned"
+                    },
+                    "401" : {
+                        "description" : "Authentication/Authorization failed",
+                        "content" : {
+                            "application/text" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Error",
+                        "content" : {
+                            "application/text" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components" : {
+        "securitySchemes" : {
+            "Authorization" : {
+                "type" : "apiKey",
+                "in" : "header",
+                "name" : "Authorization"
+            }
+        },
+        "schemas" : {
+            "GraphQLResult" : {
+                "type" : "object",
+                "properties" : {
+                    "data" : {
+                        "type" : "object",
+                        "description" : "Query or mutation result.",
+                        "additionalProperties" : true
+                    },
+                    "errors" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/GraphQLError"
+                        }
+                    }
+                }
+            },
+            "GraphQLError" : {
+                "type" : "object",
+                "description" : "errors",
+                "properties" : {
+                    "message" : {
+                        "type" : "string",
+                        "description" : "Error message."
+                    },
+                    "location" : {
+                        "type" : "object",
+                        "properties" : {
+                            "line" : {
+                                "type" : "string",
+                                "description" : "Line Number"
+                            },
+                            "column" : {
+                                "type" : "string",
+                                "description" : "Column number"
+                            }
+                        }
+                    }
+                }
+            },
+            "Error" : {
+                "type" : "object",
+                "required" : [
+                    "errorType",
+                    "message"
+                ],
+                "properties" : {
+                    "errorType" : {
+                        "type" : "string"
+                    },
+                    "message" : {
+                        "type" : "string"
+                    },
+                    "errorId" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        }
+    }
+}

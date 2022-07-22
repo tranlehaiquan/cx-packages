@@ -1,0 +1,2815 @@
+{
+    "servers" : [
+        {
+            "url" : "https://api.skedulo.com/custom"
+        }
+    ],
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "Custom Fields API",
+        "description" : "Skedulo Custom Fields API",
+        "version" : "1.0.0"
+    },
+    "paths" : {
+        "/standard_schemas" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return all schemas in the base package",
+                "description" : "",
+                "operationId" : "standardSchemas",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ResultOKStandardSchemas"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/schemas" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return all custom schemas",
+                "description" : "",
+                "operationId" : "listSchemas",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ResultOKCustomSchemas"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Insert or update custom schemas",
+                "description" : "",
+                "operationId" : "upsertSchemas",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ResultOKCustomSchemas"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/CustomSchemaInput"
+                                }
+                            }
+                        }
+                    },
+                    "description" : "custom schemas",
+                    "required" : true
+                }
+            }
+        },
+        "/schema/{schemaId}" : {
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove a custom schema",
+                "description" : "",
+                "operationId" : "deleteSchema",
+                "parameters" : [
+                    {
+                        "name" : "schemaId",
+                        "in" : "path",
+                        "description" : "Identifier of the schema to delete",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/fields" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return all custom fields",
+                "description" : "",
+                "operationId" : "listFields",
+                "parameters" : [
+                    {
+                        "name" : "schemas",
+                        "in" : "query",
+                        "description" : "Optional comma separated string of schemas to filter the results for",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ResultOKCustomFields"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Insert or update custom fields",
+                "description" : "",
+                "operationId" : "upsertFields",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/ResultOKCustomFields"
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type" : "array",
+                                "items" : {
+                                    "$ref" : "#/components/schemas/CustomFieldInput"
+                                }
+                            }
+                        }
+                    },
+                    "description" : "custom fields",
+                    "required" : true
+                }
+            }
+        },
+        "/field/{fieldId}" : {
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove a custom field",
+                "description" : "",
+                "operationId" : "deleteField",
+                "parameters" : [
+                    {
+                        "name" : "fieldId",
+                        "in" : "path",
+                        "description" : "Identifier of the field to delete",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vocabularies" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return all vocabularies keyed on schema name with values keyed on field name",
+                "description" : "",
+                "operationId" : "fetchVocabularies",
+                "parameters" : [
+                    {
+                        "name" : "names",
+                        "in" : "query",
+                        "description" : "Names of schemas to fetch vocabularies for in comma separated format. If not provided all vocabularies are returned.",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "force",
+                        "in" : "query",
+                        "description" : "If set to true the cache is replaced with a new value. Has no effect if 'names' are provided as they are not cached.",
+                        "required" : false,
+                        "schema" : {
+                            "type" : "boolean"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "required" : [
+                                        "result"
+                                    ],
+                                    "properties" : {
+                                        "result" : {
+                                            "type" : "object",
+                                            "additionalProperties" : {
+                                                "type" : "object",
+                                                "additionalProperties" : {
+                                                    "type" : "array",
+                                                    "items" : {
+                                                        "$ref" : "#/components/schemas/PicklistValue"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/metadata" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return metadata for all schemas",
+                "description" : "",
+                "operationId" : "fetchAllObjectMetadata",
+                "parameters" : [
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "required" : [
+                                        "result"
+                                    ],
+                                    "properties" : {
+                                        "result" : {
+                                            "type" : "array",
+                                            "items" : {
+                                                "$ref" : "#/components/schemas/BasicObjectMetadata"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/metadata/{mapping}" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return metadata for an object",
+                "description" : "",
+                "operationId" : "fetchObjectMetadata",
+                "parameters" : [
+                    {
+                        "name" : "mapping",
+                        "in" : "path",
+                        "description" : "The mapping to return metadata for",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "required" : [
+                                        "result"
+                                    ],
+                                    "properties" : {
+                                        "result" : {
+                                            "type" : "array",
+                                            "items" : {
+                                                "$ref" : "#/components/schemas/ObjectMetadata"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description" : "if the object does not exist"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/permissions" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return permission metadata for the given object names",
+                "description" : "",
+                "operationId" : "fetchPermissions",
+                "parameters" : [
+                    {
+                        "name" : "names",
+                        "in" : "path",
+                        "description" : "A non-empty comma separated string of object names to fetch permission metadata for",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "OK",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "result" : {
+                                            "description" : "Object permission metadata keyed by the object name",
+                                            "additionalProperties" : {
+                                                "$ref" : "#/components/schemas/ObjectPermissionMetadata"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vocabulary/{schemaName}/{fieldName}" : {
+            "get" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return vocabulary items for a given field",
+                "description" : "",
+                "operationId" : "vocabularyFetch",
+                "parameters" : [
+                    {
+                        "name" : "schemaName",
+                        "in" : "path",
+                        "description" : "Name of the schema that the vocabulary field belongs to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "fieldName",
+                        "in" : "path",
+                        "description" : "Name of a vocabulary field",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "OK",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "result" : {
+                                            "type" : "array",
+                                            "items" : {
+                                                "$ref" : "#/components/schemas/VocabularyItem"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400" : {
+                        "description" : "If the field does not exist or is not a vocabulary field"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Add a vocabulary item to a vocabulary field",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "vocabularyCreate",
+                "parameters" : [
+                    {
+                        "name" : "schemaName",
+                        "in" : "path",
+                        "description" : "Name of the schema that the vocabulary field belongs to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "fieldName",
+                        "in" : "path",
+                        "description" : "Name of a vocabulary field",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "The item was added"
+                    },
+                    "400" : {
+                        "description" : "If the field does not exist or is not a vocabulary field"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "409" : {
+                        "description" : "An item with that value already exists"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/VocabularyItem"
+                            }
+                        }
+                    },
+                    "description" : "The item to add",
+                    "required" : true
+                }
+            }
+        },
+        "/vocabulary/{schemaName}/{fieldName}/{value}" : {
+            "put" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Modify a vocabulary item on a vocabulary field",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "vocabularyUpdate",
+                "parameters" : [
+                    {
+                        "name" : "schemaName",
+                        "in" : "path",
+                        "description" : "Name of the schema that the vocabulary field belongs to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "fieldName",
+                        "in" : "path",
+                        "description" : "Name of a vocabulary field",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "value",
+                        "in" : "path",
+                        "description" : "Value of the vocabulary item to modify",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "The item was updated"
+                    },
+                    "400" : {
+                        "description" : "If the field does not exist or is not a vocabulary field"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/ModifiedVocabularyItem"
+                            }
+                        }
+                    },
+                    "description" : "The item to modify",
+                    "required" : true
+                }
+            },
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Deactivate a vocabulary item attached to a vocabulary field",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "vocabularyDeactivate",
+                "parameters" : [
+                    {
+                        "name" : "schemaName",
+                        "in" : "path",
+                        "description" : "Name of the schema that the vocabulary field belongs to",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "fieldName",
+                        "in" : "path",
+                        "description" : "Name of a vocabulary field",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    },
+                    {
+                        "name" : "value",
+                        "in" : "path",
+                        "description" : "Vocabulary item value to deactivate",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "The item was deactivated"
+                    },
+                    "400" : {
+                        "description" : "If the field does not exist or is not a vocabulary field"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vocabulary/dependency" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Create or modify the dependency relationship of a picklist field to match exactly what was provided",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "upsertFieldDependency",
+                "responses" : {
+                    "200" : {
+                        "description" : "The dependency relationship was created or updated"
+                    },
+                    "400" : {
+                        "description" : "If fields or entries provided were invalid"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/FieldDependencyInput"
+                            }
+                        }
+                    },
+                    "description" : "The dependency relationship to be created or updated",
+                    "required" : true
+                }
+            }
+        },
+        "/vocabulary/dependency/delete" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove the dependency relationship of a picklist field",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "deleteFieldDependency",
+                "responses" : {
+                    "200" : {
+                        "description" : "The dependency relationship was removed"
+                    },
+                    "400" : {
+                        "description" : "If fields provided were invalid"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/FieldDependencyKeyInput"
+                            }
+                        }
+                    },
+                    "description" : "The dependency relationship to be removed",
+                    "required" : true
+                }
+            }
+        },
+        "/vocabulary/dependency/entry" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Add a dependency between two picklist values",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "addFieldDependencyEntry",
+                "responses" : {
+                    "200" : {
+                        "description" : "The dependency relationship was created or updated"
+                    },
+                    "400" : {
+                        "description" : "If fields or entry provided were invalid"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/FieldDependencyEntryInput"
+                            }
+                        }
+                    },
+                    "description" : "The dependency relationship to be created or updated",
+                    "required" : true
+                }
+            }
+        },
+        "/vocabulary/dependency/entry/delete" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove the dependency between two picklist values",
+                "description" : "You must be an administrator in order to use this endpoint",
+                "operationId" : "deleteFieldDependencyEntry",
+                "responses" : {
+                    "200" : {
+                        "description" : "The dependency relationship was removed"
+                    },
+                    "400" : {
+                        "description" : "If fields or entry provided were invalid"
+                    },
+                    "403" : {
+                        "description" : "If the user is not an administrator"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/FieldDependencyKeyInput"
+                            }
+                        }
+                    },
+                    "description" : "The dependency relationship to be removed",
+                    "required" : true
+                }
+            }
+        },
+        "/usermetadata" : {
+            "get" : {
+                "deprecated" : true,
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Return the current users metadata",
+                "description" : "Deprecated: use the /auth/metadata/user endpoint instead",
+                "operationId" : "userMetadata",
+                "responses" : {
+                    "200" : {
+                        "description" : "The current users metadata",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "result" : {
+                                            "$ref" : "#/components/schemas/UserMetadata"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/standalone/schemas" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Create a standalone custom schema",
+                "description" : "",
+                "operationId" : "standaloneCreateSchema",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "required" : [
+                                        "result"
+                                    ],
+                                    "properties" : {
+                                        "result" : {
+                                            "type" : "object",
+                                            "required" : [
+                                                "schema",
+                                                "fields"
+                                            ],
+                                            "properties" : {
+                                                "schema" : {
+                                                    "$ref" : "#/components/schemas/CustomSchema"
+                                                },
+                                                "fields" : {
+                                                    "type" : "array",
+                                                    "items" : {
+                                                        "$ref" : "#/components/schemas/CustomField"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/NewStandaloneCustomSchema"
+                            }
+                        }
+                    },
+                    "description" : "standalone custom schema",
+                    "required" : true
+                }
+            }
+        },
+        "/standalone/schema/{schemaId}" : {
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove a custom schema",
+                "description" : "This will remove the schema along with all data contained within it",
+                "operationId" : "standaloneDeleteSchema",
+                "parameters" : [
+                    {
+                        "name" : "schemaId",
+                        "in" : "path",
+                        "description" : "Identifier of the schema to delete",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/standalone/schema/{schemaId}/track" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Track a custom schema",
+                "description" : "Enable the tracking of row inserts, updates and deletes. Changes are available via GraphQL subscriptions and webhooks.",
+                "operationId" : "standaloneTrackSchema",
+                "parameters" : [
+                    {
+                        "name" : "schemaId",
+                        "in" : "path",
+                        "description" : "Identifier of the schema to track",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Disable tracking of a custom schema",
+                "description" : "Disable the tracking of row inserts, updates and deletes for a custom schema.",
+                "operationId" : "standaloneUntrackSchema",
+                "parameters" : [
+                    {
+                        "name" : "schemaId",
+                        "in" : "path",
+                        "description" : "Identifier of the schema to untrack",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/standalone/fields" : {
+            "post" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Create a standalone custom field",
+                "description" : "",
+                "operationId" : "standaloneCreateField",
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "type" : "object",
+                                    "required" : [
+                                        "result"
+                                    ],
+                                    "properties" : {
+                                        "result" : {
+                                            "$ref" : "#/components/schemas/CustomField"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody" : {
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/NewStandaloneCustomField"
+                            }
+                        }
+                    },
+                    "description" : "standalone custom field",
+                    "required" : true
+                }
+            }
+        },
+        "/standalone/field/{fieldId}" : {
+            "delete" : {
+                "security" : [
+                    {
+                        "Authorization" : [
+                        ]
+                    }
+                ],
+                "summary" : "Remove a custom field",
+                "description" : "This will remove the field along with any data it contained",
+                "operationId" : "standaloneDeleteField",
+                "parameters" : [
+                    {
+                        "name" : "fieldId",
+                        "in" : "path",
+                        "description" : "Identifier of the field to delete",
+                        "required" : true,
+                        "schema" : {
+                            "type" : "string",
+                            "format" : "uuid"
+                        }
+                    }
+                ],
+                "responses" : {
+                    "200" : {
+                        "description" : "successful operation"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "content" : {
+                            "application/json" : {
+                                "schema" : {
+                                    "$ref" : "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components" : {
+        "securitySchemes" : {
+            "Authorization" : {
+                "type" : "apiKey",
+                "in" : "header",
+                "name" : "Authorization"
+            }
+        },
+        "schemas" : {
+            "CustomField" : {
+                "type" : "object",
+                "required" : [
+                    "id",
+                    "name",
+                    "schemaName",
+                    "fieldType",
+                    "mapping",
+                    "required",
+                    "upsertKey",
+                    "accessMode",
+                    "readOnly",
+                    "isAlert",
+                    "showDesktop",
+                    "showMobile",
+                    "editableOnMobile",
+                    "requiredOnMobile"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string",
+                        "format" : "uuid"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "schemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema this field belongs to"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "fieldType" : {
+                        "type" : "string",
+                        "enum" : [
+                            "string",
+                            "id",
+                            "calculated",
+                            "email",
+                            "encryptedstring",
+                            "reference",
+                            "textarea",
+                            "htmltextarea",
+                            "combobox",
+                            "multipicklist",
+                            "picklist",
+                            "phone",
+                            "url",
+                            "int",
+                            "double",
+                            "decimal",
+                            "currency",
+                            "percent",
+                            "duration",
+                            "time",
+                            "date",
+                            "datetime",
+                            "boolean"
+                        ]
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the remote system (eg. sked__FieldName__c for Salesforce)"
+                    },
+                    "referenceSchemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema. Required if fieldType is reference."
+                    },
+                    "referenceSchemaFieldName" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the referenced schema."
+                    },
+                    "required" : {
+                        "type" : "boolean"
+                    },
+                    "upsertKey" : {
+                        "type" : "boolean"
+                    },
+                    "accessMode" : {
+                        "type" : "string",
+                        "enum" : [
+                            "read_only",
+                            "read_write",
+                            "insert_only"
+                        ]
+                    },
+                    "readOnly" : {
+                        "description" : "Deprecated in favor of 'accessMode'",
+                        "type" : "boolean"
+                    },
+                    "maxLength" : {
+                        "description" : "The maximum number of characters that are allowed.",
+                        "type" : "integer"
+                    },
+                    "precision" : {
+                        "description" : "The total number of digits that are allowed. For example, the number 123.45 has a precision of 5.",
+                        "type" : "integer"
+                    },
+                    "scale" : {
+                        "description" : "The number of digits to the right of the decimal point that are allowed. For example, the number 123.45 has a scale of 2.",
+                        "type" : "integer"
+                    },
+                    "isAlert" : {
+                        "description" : "Should this field be promoted and shown at the top? Only one field per schema can have this set.",
+                        "type" : "boolean"
+                    },
+                    "showIf" : {
+                        "type" : "string"
+                    },
+                    "showDesktop" : {
+                        "type" : "boolean"
+                    },
+                    "showMobile" : {
+                        "type" : "boolean"
+                    },
+                    "editableOnMobile" : {
+                        "type" : "boolean"
+                    },
+                    "requiredOnMobile" : {
+                        "type" : "boolean"
+                    },
+                    "displayOrder" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+            "CustomFieldInput" : {
+                "type" : "object",
+                "required" : [
+                    "name",
+                    "schemaName",
+                    "fieldType",
+                    "mapping"
+                ],
+                "properties" : {
+                    "id" : {
+                        "description" : "If not provided a new field is created otherwise the field with the id is updated",
+                        "type" : "string",
+                        "format" : "uuid"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "schemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema this field belongs to"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "fieldType" : {
+                        "type" : "string",
+                        "enum" : [
+                            "string",
+                            "id",
+                            "calculated",
+                            "email",
+                            "encryptedstring",
+                            "reference",
+                            "textarea",
+                            "htmltextarea",
+                            "combobox",
+                            "multipicklist",
+                            "picklist",
+                            "phone",
+                            "url",
+                            "int",
+                            "double",
+                            "decimal",
+                            "currency",
+                            "percent",
+                            "duration",
+                            "time",
+                            "date",
+                            "datetime",
+                            "boolean"
+                        ]
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the remote system (eg. sked__FieldName__c for Salesforce)"
+                    },
+                    "referenceSchemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema. Required if fieldType is reference."
+                    },
+                    "referenceSchemaFieldName" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the referenced schema."
+                    },
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "upsertKey" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "accessMode" : {
+                        "type" : "string",
+                        "enum" : [
+                            "read_only",
+                            "read_write",
+                            "insert_only"
+                        ],
+                        "default" : "read_write"
+                    },
+                    "readOnly" : {
+                        "description" : "Deprecated in favor of 'accessMode' and ignored if it is set.",
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "maxLength" : {
+                        "description" : "The maximum number of characters that are allowed.",
+                        "type" : "integer"
+                    },
+                    "precision" : {
+                        "description" : "The total number of digits that are allowed. For example, the number 123.45 has a precision of 5.",
+                        "type" : "integer"
+                    },
+                    "scale" : {
+                        "description" : "The number of digits to the right of the decimal point that are allowed. For example, the number 123.45 has a scale of 2.",
+                        "type" : "integer"
+                    },
+                    "showIf" : {
+                        "type" : "string"
+                    },
+                    "isAlert" : {
+                        "description" : "Should this field be promoted and shown at the top? Only one field per schema can have this set.",
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "showDesktop" : {
+                        "type" : "boolean",
+                        "default" : true
+                    },
+                    "showMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "editableOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "requiredOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "displayOrder" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+            "CustomSchema" : {
+                "type" : "object",
+                "required" : [
+                    "id",
+                    "name",
+                    "mapping"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string",
+                        "format" : "uuid"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    }
+                }
+            },
+            "CustomSchemaInput" : {
+                "type" : "object",
+                "required" : [
+                    "name",
+                    "mapping"
+                ],
+                "properties" : {
+                    "id" : {
+                        "description" : "If not provided a new schema is created otherwise the schema with the id is updated",
+                        "type" : "string",
+                        "format" : "uuid"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    }
+                }
+            },
+            "NewStandaloneCustomSchema" : {
+                "type" : "object",
+                "required" : [
+                    "name"
+                ],
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "fields" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/NewStandaloneCustomSchemaField"
+                        },
+                        "description" : "Fields to create at the same time as the object. These fields are allowed to be required and have no default as there is no data in the object yet."
+                    }
+                }
+            },
+            "NewStandaloneCustomSchemaField" : {
+                "type" : "object",
+                "required" : [
+                    "name",
+                    "column"
+                ],
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "accessMode" : {
+                        "type" : "string",
+                        "enum" : [
+                            "read_only",
+                            "read_write",
+                            "insert_only"
+                        ],
+                        "default" : "read_write"
+                    },
+                    "column" : {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    },
+                    "showIf" : {
+                        "type" : "string"
+                    },
+                    "isAlert" : {
+                        "description" : "Should this field be promoted and shown at the top? Only one field per schema can have this set.",
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "showDesktop" : {
+                        "type" : "boolean",
+                        "default" : true
+                    },
+                    "showMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "editableOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "requiredOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "displayOrder" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+            "NewStandaloneCustomField" : {
+                "type" : "object",
+                "required" : [
+                    "name",
+                    "schemaName",
+                    "column"
+                ],
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "schemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema this field belongs to"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "description" : {
+                        "type" : "string",
+                        "description" : "Description display only when modifying this fields definition"
+                    },
+                    "accessMode" : {
+                        "type" : "string",
+                        "enum" : [
+                            "read_only",
+                            "read_write",
+                            "insert_only"
+                        ],
+                        "default" : "read_write"
+                    },
+                    "column" : {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    },
+                    "showIf" : {
+                        "type" : "string"
+                    },
+                    "isAlert" : {
+                        "description" : "Should this field be promoted and shown at the top? Only one field per schema can have this set.",
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "showDesktop" : {
+                        "type" : "boolean",
+                        "default" : true
+                    },
+                    "showMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "editableOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "requiredOnMobile" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "displayOrder" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumn" : {
+                "type" : "object",
+                "required" : [
+                    "type"
+                ],
+                "discriminator" : {
+                    "propertyName" : "type"
+                },
+                "properties" : {
+                    "type" : {
+                        "type" : "string",
+                        "enum" : [
+                            "string",
+                            "textarea",
+                            "url",
+                            "picklist",
+                            "multipicklist",
+                            "int",
+                            "decimal",
+                            "boolean",
+                            "date",
+                            "datetime",
+                            "time",
+                            "reference"
+                        ]
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnString" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "unique" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "maxLength" : {
+                        "type" : "integer",
+                        "description" : "The maximum number of characters that are allowed.",
+                        "default" : 255
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnTextArea" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "maxLength" : {
+                        "type" : "integer",
+                        "description" : "The maximum number of characters that are allowed.",
+                        "default" : 255
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnUrl" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "unique" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "description" : "Must be set if adding a required field. A URL field can be templated using 'mustache' format where the template parameter refers to a field of the parent object. e.g. for a Job, {{Name}} will be translated to the value of Job.Name"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "maxLength" : {
+                        "type" : "integer",
+                        "description" : "The maximum number of characters that are allowed.",
+                        "default" : 255
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnPicklist" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "required" : [
+                    "items"
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "items" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "array",
+                            "items" : {
+                                "type" : "string"
+                            }
+                        },
+                        "description" : "A non-empty array of key-value pairs. The order they are provided will be the order they are displayed."
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnMultiPicklist" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "required" : [
+                    "items"
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "string"
+                        },
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "items" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "array",
+                            "items" : {
+                                "type" : "string"
+                            }
+                        },
+                        "description" : "A non-empty array of key-value pairs. The order they are provided will be the order they are displayed."
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnInt" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "unique" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "integer",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnDecimal" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "unique" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    },
+                    "precision" : {
+                        "description" : "The total number of digits that are allowed. For example, the number 123.45 has a precision of 5. The minimum value is 1 and the maximum value is 18.",
+                        "type" : "integer",
+                        "minimum" : 1,
+                        "maximum" : 18
+                    },
+                    "scale" : {
+                        "description" : "The number of digits to the right of the decimal point that are allowed. For example, the number 123.45 has a scale of 2. The maximum value is one less than the precision.",
+                        "type" : "integer",
+                        "minimum" : 0
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnBoolean" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "required" : [
+                    "default"
+                ],
+                "properties" : {
+                    "default" : {
+                        "type" : "boolean"
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnDate" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "format" : "date",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnDateTime" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "format" : "date-time",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnTime" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "format" : "time",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    }
+                }
+            },
+            "NewStandaloneCustomFieldColumnReference" : {
+                "allOf" : [
+                    {
+                        "$ref" : "#/components/schemas/NewStandaloneCustomFieldColumn"
+                    }
+                ],
+                "required" : [
+                    "referenceSchemaName"
+                ],
+                "properties" : {
+                    "required" : {
+                        "type" : "boolean",
+                        "default" : false
+                    },
+                    "defaultValue" : {
+                        "type" : "string",
+                        "format" : "uuid",
+                        "description" : "Must be set if adding a required field"
+                    },
+                    "referenceSchemaName" : {
+                        "type" : "string",
+                        "description" : "The name of the schema to link to."
+                    },
+                    "temporaryDefaultValue" : {
+                        "type" : "boolean",
+                        "description" : "Is the default value only used when creating the field",
+                        "default" : false
+                    }
+                }
+            },
+            "StandardSchema" : {
+                "type" : "object",
+                "required" : [
+                    "name",
+                    "label",
+                    "mapping"
+                ],
+                "properties" : {
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Internal name"
+                    },
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    }
+                }
+            },
+            "BasicObjectMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "label",
+                    "mapping"
+                ],
+                "properties" : {
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "labelPlural" : {
+                        "type" : "string",
+                        "description" : "Display name when used in a plural context"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "nullable" : true,
+                        "description" : "The name of the object in the Skedulo system. Null if the field is not defined in Skedulo."
+                    }
+                }
+            },
+            "ObjectMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "label",
+                    "mapping",
+                    "fields",
+                    "relationships"
+                ],
+                "properties" : {
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "labelPlural" : {
+                        "type" : "string",
+                        "description" : "Display name when used in a plural context"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "nullable" : true,
+                        "description" : "The name of the object in the Skedulo system. Null if the field is not defined in Skedulo."
+                    },
+                    "fields" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/FieldMetadata"
+                        }
+                    },
+                    "relationships" : {
+                        "type" : "array",
+                        "description" : "Relationships that reference this schema",
+                        "items" : {
+                            "$ref" : "#/components/schemas/ObjectMetadataRelationship"
+                        }
+                    }
+                }
+            },
+            "FieldMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "label",
+                    "mapping",
+                    "type",
+                    "nillable",
+                    "length",
+                    "upsertKey",
+                    "unique",
+                    "readOnly",
+                    "accessMode",
+                    "values"
+                ],
+                "properties" : {
+                    "label" : {
+                        "type" : "string",
+                        "description" : "Display name"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the remote system (eg. Field__c for Salesforce)"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "nullable" : true,
+                        "description" : "The name of the field in the Skedulo system. Null if the field is not defined in Skedulo."
+                    },
+                    "type" : {
+                        "type" : "string",
+                        "enum" : [
+                            "string",
+                            "id",
+                            "calculated",
+                            "email",
+                            "encryptedstring",
+                            "reference",
+                            "textarea",
+                            "htmltextarea",
+                            "combobox",
+                            "multipicklist",
+                            "picklist",
+                            "phone",
+                            "url",
+                            "int",
+                            "double",
+                            "decimal",
+                            "currency",
+                            "percent",
+                            "duration",
+                            "time",
+                            "date",
+                            "datetime",
+                            "boolean"
+                        ]
+                    },
+                    "nillable" : {
+                        "type" : "boolean"
+                    },
+                    "length" : {
+                        "description" : "The allowed length of the field. Possibly returns 0 in certain cases as a fallback value. Deprecated in favour of 'maxLength'.",
+                        "type" : "integer"
+                    },
+                    "maxLength" : {
+                        "description" : "The maximum allowed length of the field. Can return null if a maximum length does not apply.",
+                        "type" : "integer"
+                    },
+                    "precision" : {
+                        "description" : "The total number of digits that are allowed. For example, the number 123.45 has a precision of 5.",
+                        "type" : "integer"
+                    },
+                    "scale" : {
+                        "description" : "The number of digits to the right of the decimal point that are allowed. For example, the number 123.45 has a scale of 2.",
+                        "type" : "integer"
+                    },
+                    "upsertKey" : {
+                        "type" : "boolean"
+                    },
+                    "unique" : {
+                        "type" : "boolean"
+                    },
+                    "readOnly" : {
+                        "description" : "Deprecated in favour of 'accessMode' which contains more information about how a field can be accessed",
+                        "type" : "boolean"
+                    },
+                    "accessMode" : {
+                        "type" : "string",
+                        "enum" : [
+                            "read_only",
+                            "read_write",
+                            "insert_only",
+                            "update_only"
+                        ]
+                    },
+                    "relationship" : {
+                        "$ref" : "#/components/schemas/FieldMetadataRelationship"
+                    },
+                    "values" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/FieldMetadataValue"
+                        }
+                    }
+                }
+            },
+            "FieldMetadataRelationship" : {
+                "type" : "object",
+                "required" : [
+                    "schemaMapping",
+                    "mapping"
+                ],
+                "properties" : {
+                    "schemaMapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the relationship in the remote system (eg. Field__r for Salesforce)"
+                    }
+                }
+            },
+            "FieldMetadataValue" : {
+                "type" : "object",
+                "required" : [
+                    "label",
+                    "value",
+                    "active",
+                    "defaultValue"
+                ],
+                "properties" : {
+                    "label" : {
+                        "type" : "string"
+                    },
+                    "value" : {
+                        "type" : "string"
+                    },
+                    "active" : {
+                        "type" : "boolean"
+                    },
+                    "defaultValue" : {
+                        "type" : "boolean"
+                    }
+                }
+            },
+            "ObjectMetadataRelationship" : {
+                "type" : "object",
+                "required" : [
+                    "schemaMapping",
+                    "mapping",
+                    "fieldMapping"
+                ],
+                "properties" : {
+                    "schemaMapping" : {
+                        "type" : "string",
+                        "description" : "The name of the schema in the remote system (eg. Schema__c for Salesforce)"
+                    },
+                    "mapping" : {
+                        "type" : "string",
+                        "description" : "The name of the relationship in the remote system (eg. Field__r for Salesforce)"
+                    },
+                    "fieldMapping" : {
+                        "type" : "string",
+                        "description" : "The name of the field in the remote system (eg. Field__c for Salesforce)"
+                    }
+                }
+            },
+            "ObjectPermissionMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "read",
+                    "create",
+                    "update",
+                    "delete",
+                    "fields"
+                ],
+                "properties" : {
+                    "read" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to read from this object"
+                    },
+                    "create" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to create a record in this object"
+                    },
+                    "update" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to update a record in this object"
+                    },
+                    "delete" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to delete a record in this object"
+                    },
+                    "fields" : {
+                        "description" : "Fields of the object keyed by their name",
+                        "additionalProperties" : {
+                            "$ref" : "#/components/schemas/FieldPermissionMetadata"
+                        }
+                    }
+                }
+            },
+            "FieldPermissionMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "read",
+                    "create",
+                    "update"
+                ],
+                "properties" : {
+                    "read" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to read from this field"
+                    },
+                    "create" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to insert a value into this field"
+                    },
+                    "update" : {
+                        "type" : "boolean",
+                        "description" : "True if the current user has permission to update a value in this field"
+                    }
+                }
+            },
+            "PicklistValue" : {
+                "type" : "object",
+                "required" : [
+                    "value",
+                    "label",
+                    "active",
+                    "defaultValue",
+                    "validFor"
+                ],
+                "properties" : {
+                    "value" : {
+                        "type" : "string"
+                    },
+                    "label" : {
+                        "type" : "string"
+                    },
+                    "active" : {
+                        "type" : "boolean"
+                    },
+                    "defaultValue" : {
+                        "type" : "boolean"
+                    },
+                    "controller" : {
+                        "type" : "string"
+                    },
+                    "controllingField" : {
+                        "type" : "string"
+                    },
+                    "validFor" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "string"
+                        }
+                    }
+                }
+            },
+            "VocabularyItem" : {
+                "type" : "object",
+                "required" : [
+                    "label",
+                    "value",
+                    "active",
+                    "defaultValue",
+                    "validFor"
+                ],
+                "properties" : {
+                    "label" : {
+                        "type" : "string"
+                    },
+                    "value" : {
+                        "type" : "string"
+                    },
+                    "active" : {
+                        "type" : "boolean"
+                    },
+                    "defaultValue" : {
+                        "type" : "boolean"
+                    },
+                    "controllingField" : {
+                        "type" : "string"
+                    },
+                    "validFor" : {
+                        "type" : "array",
+                        "items" : {
+                            "type" : "string"
+                        }
+                    }
+                }
+            },
+            "ModifiedVocabularyItem" : {
+                "type" : "object",
+                "properties" : {
+                    "label" : {
+                        "type" : "string"
+                    },
+                    "value" : {
+                        "type" : "string"
+                    },
+                    "active" : {
+                        "type" : "boolean"
+                    },
+                    "defaultValue" : {
+                        "type" : "boolean"
+                    }
+                }
+            },
+            "FieldDependencyKeyInput" : {
+                "type" : "object",
+                "required" : [
+                    "schemaName",
+                    "dependentField",
+                    "controllingField"
+                ],
+                "properties" : {
+                    "schemaName" : {
+                        "type" : "string"
+                    },
+                    "dependentField" : {
+                        "type" : "string"
+                    },
+                    "controllingField" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "FieldDependencyInput" : {
+                "type" : "object",
+                "required" : [
+                    "schemaName",
+                    "dependentField",
+                    "controllingField",
+                    "entries"
+                ],
+                "properties" : {
+                    "schemaName" : {
+                        "type" : "string"
+                    },
+                    "dependentField" : {
+                        "type" : "string"
+                    },
+                    "controllingField" : {
+                        "type" : "string"
+                    },
+                    "entries" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/FieldDependencyEntry"
+                        }
+                    }
+                }
+            },
+            "FieldDependencyEntryInput" : {
+                "type" : "object",
+                "required" : [
+                    "schemaName",
+                    "dependentField",
+                    "controllingField",
+                    "entry"
+                ],
+                "properties" : {
+                    "schemaName" : {
+                        "type" : "string"
+                    },
+                    "dependentField" : {
+                        "type" : "string"
+                    },
+                    "controllingField" : {
+                        "type" : "string"
+                    },
+                    "entry" : {
+                        "$ref" : "#/components/schemas/FieldDependencyEntry"
+                    }
+                }
+            },
+            "FieldDependencyEntry" : {
+                "type" : "object",
+                "required" : [
+                    "dependentValue",
+                    "controllingValue"
+                ],
+                "properties" : {
+                    "dependentValue" : {
+                        "type" : "string"
+                    },
+                    "controllingValue" : {
+                        "type" : "string"
+                    }
+                }
+            },
+            "UserMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "email",
+                    "fullName",
+                    "id",
+                    "isSkeduloAdmin",
+                    "isSkeduloScheduler",
+                    "isSkeduloUser",
+                    "orgId",
+                    "orgName",
+                    "profileId",
+                    "roleId",
+                    "sfdcDomain",
+                    "username",
+                    "userroles"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string"
+                    },
+                    "email" : {
+                        "type" : "string"
+                    },
+                    "username" : {
+                        "type" : "string"
+                    },
+                    "fullName" : {
+                        "type" : "string"
+                    },
+                    "profileId" : {
+                        "type" : "string"
+                    },
+                    "roleId" : {
+                        "type" : "string"
+                    },
+                    "orgName" : {
+                        "type" : "string"
+                    },
+                    "orgId" : {
+                        "type" : "string"
+                    },
+                    "sfdcDomain" : {
+                        "type" : "string"
+                    },
+                    "isSkeduloScheduler" : {
+                        "type" : "boolean"
+                    },
+                    "isSkeduloUser" : {
+                        "type" : "boolean"
+                    },
+                    "isSkeduloAdmin" : {
+                        "type" : "boolean"
+                    },
+                    "userroles" : {
+                        "type" : "string"
+                    },
+                    "smallPhotoUrl" : {
+                        "type" : "string"
+                    },
+                    "category" : {
+                        "type" : "string"
+                    },
+                    "resourceId" : {
+                        "type" : "string"
+                    },
+                    "latitude" : {
+                        "type" : "number"
+                    },
+                    "longitude" : {
+                        "type" : "number"
+                    },
+                    "address" : {
+                        "type" : "string"
+                    },
+                    "timezone" : {
+                        "type" : "string"
+                    },
+                    "country" : {
+                        "type" : "string"
+                    },
+                    "teamMetadata" : {
+                        "$ref" : "#/components/schemas/TeamMetadata"
+                    }
+                }
+            },
+            "TeamMetadata" : {
+                "type" : "object",
+                "required" : [
+                    "id",
+                    "name",
+                    "description",
+                    "vendor",
+                    "orgId"
+                ],
+                "properties" : {
+                    "id" : {
+                        "type" : "string"
+                    },
+                    "name" : {
+                        "type" : "string",
+                        "description" : "Primary name of the team. This is always the subdomain part of the team's custom Skedulo domain"
+                    },
+                    "description" : {
+                        "type" : "string"
+                    },
+                    "vendor" : {
+                        "type" : "string",
+                        "enum" : [
+                            "salesforce",
+                            "servicenow",
+                            "skedulo"
+                        ]
+                    },
+                    "orgId" : {
+                        "type" : "string"
+                    },
+                    "customer" : {
+                        "description" : "The customer name.",
+                        "type" : "string"
+                    }
+                }
+            },
+            "ResultOKCustomFields" : {
+                "type" : "object",
+                "required" : [
+                    "result"
+                ],
+                "properties" : {
+                    "result" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/CustomField"
+                        }
+                    }
+                }
+            },
+            "ResultOKCustomSchemas" : {
+                "type" : "object",
+                "required" : [
+                    "result"
+                ],
+                "properties" : {
+                    "result" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/CustomSchema"
+                        }
+                    }
+                }
+            },
+            "ResultOKStandardSchemas" : {
+                "type" : "object",
+                "required" : [
+                    "result"
+                ],
+                "properties" : {
+                    "result" : {
+                        "type" : "array",
+                        "items" : {
+                            "$ref" : "#/components/schemas/StandardSchema"
+                        }
+                    }
+                }
+            },
+            "Error" : {
+                "type" : "object",
+                "required" : [
+                    "errorType",
+                    "message"
+                ],
+                "properties" : {
+                    "errorType" : {
+                        "type" : "string"
+                    },
+                    "message" : {
+                        "type" : "string"
+                    }
+                }
+            }
+        }
+    }
+}

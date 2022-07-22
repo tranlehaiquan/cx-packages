@@ -1,7 +1,10 @@
 import "./fetch-polyfill";
 import { paths } from "./schema";
-import { Fetcher } from "openapi-typescript-fetch";
-import { FetchConfig } from "openapi-typescript-fetch/dist/cjs/types";
+
+// openapi-typescript-fetch
+// but because package required > 12.0.0 then download to local
+import { Fetcher } from "./fetcher";
+import { FetchConfig } from "./fetcher/types";
 
 // declare fetcher for paths
 const fetcher = Fetcher.for<paths>();
@@ -34,8 +37,15 @@ const createFetch = (fetchConfig: FetchConfig) => {
     .method("post")
     .create();
 
+  const getListRecurring = fetcher
+    .path("/recurring/schedules")
+    .method("get")
+    .create();
+
   const graphql = fetcher.path("/graphql").method("post").create();
   const graphqlBatch = fetcher.path("/graphql/batch").method("post").create();
+
+  const fetchResourceAvailability = fetcher.path("/availability").method("get").create();
 
   return {
     fetchVocabulary,
@@ -45,6 +55,8 @@ const createFetch = (fetchConfig: FetchConfig) => {
     fetchAddressGeocode,
     graphql,
     graphqlBatch,
+    getListRecurring,
+    fetchResourceAvailability,
   };
 };
 
