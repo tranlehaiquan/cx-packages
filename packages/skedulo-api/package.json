@@ -1,11 +1,11 @@
 {
-  "name": "skedulo-api",
+  "name": "cx-skedulo-api",
+  "description": "API consumer for the Schedulo API",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "ts-node": "^10.9.1",
     "build": "yarn clean && yarn build:ts && yarn build:declarations",
     "build:ts": "babel src --out-dir dist --config-file ./babel.config.js --extensions '.ts,.tsx'",
     "build:declarations": "tsc --emitDeclarationOnly --skipLibCheck --outDir dist",

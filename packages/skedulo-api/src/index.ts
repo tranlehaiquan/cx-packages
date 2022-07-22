@@ -45,7 +45,10 @@ const createFetch = (fetchConfig: FetchConfig) => {
   const graphql = fetcher.path("/graphql").method("post").create();
   const graphqlBatch = fetcher.path("/graphql/batch").method("post").create();
 
-  const fetchResourceAvailability = fetcher.path("/availability").method("get").create();
+  const fetchResourceAvailability = fetcher
+    .path("/availability")
+    .method("get")
+    .create();
 
   return {
     fetchVocabulary,
