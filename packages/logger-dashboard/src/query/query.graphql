@@ -1,0 +1,112 @@
+query fetchJobs($filter: EQLQueryFilterJobs) {
+  jobs(filter: $filter, orderBy: "CreatedDate DESC") {
+    edges {
+      node {
+        UID
+        Name
+      }
+    }
+  }
+}
+
+query fetchVendors {
+  vendors {
+    edges {
+      node {
+        UID
+        Name
+        TenantId
+        Description
+      }
+    }
+  }
+}
+
+query fetchVendorById($UID: ID!) {
+  vendorsById(UID: $UID) {
+    UID
+    Name
+    TenantId
+    Description
+  }
+}
+
+mutation insertVendor($input: NewVendors!) {
+  schema {
+    insertVendors(input: $input)
+  }
+}
+
+mutation insertMonitor($input: NewMonitors!) {
+  schema {
+    insertMonitors(input: $input)
+  }
+}
+
+mutation monitorLogs($input: NewMonitorLogs!) {
+  schema {
+    insertMonitorLogs(input: $input)
+  }
+}
+
+query fetchMonitor($filter: EQLQueryFilterMonitors) {
+  monitors(filter: $filter) {
+    edges {
+       node {
+        UID
+        Name
+        VendorsId
+      }
+    }
+  }
+}
+
+query fetchVendorTags($filter: EQLQueryFilterVendorTag) {
+  vendorTag (filter: $filter) {
+    edges {
+      node {
+        UID
+        VendorsId
+        TagsId
+      }
+    }
+  }
+}
+
+query fetchTags($filter: EQLQueryFilterTags) {
+  tags (filter: $filter) {
+    edges {
+      node {
+        UID
+        Name
+      }
+    }
+  }
+}
+
+query fetchMonitorLogs($filter: EQLQueryFilterMonitorLogs) {
+  monitorLogs(filter: $filter, orderBy: "CreatedDate DESC") {
+    edges {
+      node {
+        CreatedDate
+        UID
+        Name
+        Description
+        Type
+        MonitorsId
+      }
+    }
+  }
+}
+
+subscription SubLog ($filter: EQLRecordFilterMonitorLogs, $operation: [SchemaSubscriptionOp!]) {
+  schemaMonitorLogs(operation: $operation, filter: $filter) {
+    data {
+      CreatedDate
+      UID
+      Name
+      Description
+      Type
+    }
+  }
+}

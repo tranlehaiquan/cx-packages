@@ -1,0 +1,15 @@
+overwrite: true
+schema: 
+  - "https://api.skedulo.com/graphql/graphql":
+      headers:
+        Authorization: "Bearer ${VITE_SKEDULO_TOKEN}"
+documents: './src/**/*.graphql'
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
