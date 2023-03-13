@@ -1,4 +1,4 @@
-import createFetch from "skedulo-api";
+import createFetch from "cx-skedulo-api";
 
 const fetch = createFetch( {
   baseUrl: "https://api.skedulo.com",

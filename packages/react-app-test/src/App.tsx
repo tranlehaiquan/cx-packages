@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import fetch from "./fetch";
+// import fetch from "./fetch";
 
 function App() {
   const [result, setResult] = useState<any>()
   
   useEffect(() => {
     (async () => {
-      const a = await fetch.fetchVocabulary({
-        schemaName: "Jobs",
-        fieldName: "JobStatus",
-      });
-      const b = await fetch.fetchUserMetadata({})
-      console.log(a);
-      console.log(b);
-      setResult(a.data.result)
+      // const a = await fetch.fetchVocabulary({
+      //   schemaName: "Jobs",
+      //   fieldName: "JobStatus",
+      // });
+      // const b = await fetch.fetchUserMetadata({})
+      // console.log(a);
+      // console.log(b);
+      // setResult(a.data.result)
     })();
   }, []);
 
