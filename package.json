@@ -10,7 +10,7 @@
   "author": "",
   "workspaces": [
     "packages/*",
-    "examples/*"
+    "apps/*"
   ],
   "license": "ISC",
   "private": true,
